@@ -80,6 +80,9 @@ const  List =  () => {
                       className="Icon"
                       alt="edit"
                       src="https://cdn-icons-png.flaticon.com/512/747/747825.png"
+                      width="30"
+                      height="30"
+
                     ></img>
                   </button>
                 </td>
@@ -89,6 +92,8 @@ const  List =  () => {
                       className="Icon"
                       alt="delete"
                       src="https://cdn-icons-png.flaticon.com/512/5602/5602138.png"
+                      width="30"
+                      height="30"
                     ></img>
                   </button>
                 </td>
