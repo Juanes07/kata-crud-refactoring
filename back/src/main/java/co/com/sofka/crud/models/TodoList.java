@@ -1,5 +1,6 @@
 package co.com.sofka.crud.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,7 +28,12 @@ public class TodoList {
     @Column(name = "name_list", length = 50)
     private String listname;
 
-
+    @OneToMany(mappedBy = "todoList",
+    targetEntity = Todo.class,
+    fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Set<Todo> todos;
 
 
 }

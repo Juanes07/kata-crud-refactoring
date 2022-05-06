@@ -1,5 +1,6 @@
 package co.com.sofka.crud.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,6 +21,12 @@ public class Todo {
     @NotEmpty
     @Column(name = "completed", nullable = false)
     private boolean completed;
-    private String groupListId;
+
+    @ManyToOne(fetch = FetchType.LAZY,
+            targetEntity = TodoList.class,
+            optional = false)
+    @JoinColumn(name = "todolist_id")
+    @JsonBackReference
+    private TodoList todoList;
 
 }
