@@ -1,7 +1,6 @@
 import React, { useReducer } from "react";
-import reducer from "../reducer/reducer"
-
 import { initialState, Store } from "../App";
+import reducer from "../reducer/reducer"
 
 const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

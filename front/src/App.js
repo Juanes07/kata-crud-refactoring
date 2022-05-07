@@ -1,28 +1,29 @@
-import React, {
-  createContext,
-} from "react";
-
-import TodoForm from "./components/TodoForm";
-import List from "./components/List";
-import StoreProvider from "./storeProvider/StoreProvider"
+import React, { createContext } from "react";
+import StoreProvider from "./storeProvider/StoreProvider";
 import FormNewList from "./components/FormNewList";
+import ListTodos from "./components/ListTodos";
+import { Fragment } from "react/cjs/react.production.min";
 
 export const HOST_API = "http://localhost:8080/api";
 export const initialState = {
   todo: { list: [], item: {} },
-  todoList: {list: [], item: {}}
+  todoList: { list: [], item: {} },
 };
 export const Store = createContext(initialState);
 
 function App() {
   return (
-    <StoreProvider>
-      <FormNewList/>
-      <div id="createAlert"></div>
-      <h3>To-Do List</h3>
-      <TodoForm />
-      <List />
-    </StoreProvider>
+    <Fragment>
+      <div className="container">
+        <StoreProvider>
+          <FormNewList />
+          <div id="createAlert"></div>
+          <div className="row" id="rowList">
+            <ListTodos />
+          </div>
+        </StoreProvider>
+      </div>
+    </Fragment>
   );
 }
 
