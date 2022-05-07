@@ -16,7 +16,7 @@ const List = ({ id }) => {
 
   useEffect(() => {
     fetch(HOST_API + "/todos")
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((list) => {
         dispatch({ type: "update-list", list });
       });

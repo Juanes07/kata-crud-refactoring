@@ -10,11 +10,12 @@ const ListTodos = () => {
   } = useContext(Store);
   const lista = todoList.list;
   //TODO pendiente la peticion de bd
+  
   useEffect(() => {
     fetch(HOST_API + "/groupLists")
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((list) => {
-        dispatch({ type: "update-listTodos", list });
+        dispatch({ type: "update-groupList", list });
       });
   }, [dispatch]);
 
@@ -23,7 +24,7 @@ const ListTodos = () => {
     fetch(HOST_API + "/" + id_groupList + "/groupList", {
       method: "DELETE",
     }).then((list) => {
-      dispatch({ type: "delete-listTodos", id_groupList });
+      dispatch({ type: "delete-groupList", id_groupList });
     });
 
     const deleteDiv = document.getElementById("rowList");

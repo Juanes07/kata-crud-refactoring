@@ -21,28 +21,24 @@ const TodoForm = ({ id }) => {
       id_groupList: id.id_groupList,
     };
 
-    // if (state.name.length > 15) {
-    //   let createAlert = document.getElementById("createAlert");
-    //   createAlert.innerHTML = `<div class="alert alert-warning" role="alert">
-    //   <h2>La tarea no debe sobrepasar los 15 caracteres</h2>
-    // </div>`;
-    //   setTimeout(() => {
-    //     createAlert.innerHTML = "";
-    //   }, 3000);
-    // }
-    fetch(HOST_API + "/todo", {
-      method: "POST",
-      body: JSON.stringify(request),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((todo) => {
-        dispatch({ type: "add-item", item: todo });
-        setState({ name: "" });
-        formRef.current.reset();
-      });
+    /**
+     * valida que el ToDo tenga como minimo 4 caracteres
+     */
+    if (state.name.length > 3) {
+      fetch(HOST_API + "/todo", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((todo) => {
+          dispatch({ type: "add-item", item: todo });
+          setState({ name: "" });
+          formRef.current.reset();
+        });
+    }
   };
 
   const onEdit = (event) => {
@@ -93,7 +89,7 @@ const TodoForm = ({ id }) => {
         </button>
       )}
       {!item.id_todo && (
-        <button disabled={wihtOutTodo(state.name)} onClick={onAdd}>
+        <button className="btn btn-success" disabled={wihtOutTodo(state.name)} onClick={onAdd}>
           Crear
         </button>
       )}

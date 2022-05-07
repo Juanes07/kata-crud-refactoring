@@ -1,8 +1,7 @@
-import React, { createContext } from "react";
+import React, { createContext, Fragment } from "react";
 import StoreProvider from "./storeProvider/StoreProvider";
 import FormNewList from "./components/FormNewList";
 import ListTodos from "./components/ListTodos";
-import { Fragment } from "react/cjs/react.production.min";
 
 export const HOST_API = "http://localhost:8080/api";
 export const initialState = {
@@ -23,7 +22,7 @@ function App() {
           </div>
         </StoreProvider>
       </div>
-    </Fragment>
+      </Fragment>
   );
 }
 
