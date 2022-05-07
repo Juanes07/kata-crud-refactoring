@@ -2,7 +2,6 @@ package co.com.sofka.crud.services;
 
 import co.com.sofka.crud.models.Todo;
 import co.com.sofka.crud.repositories.TodoRepository;
-import co.com.sofka.crud.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,19 +10,17 @@ public class TodoService {
 
     @Autowired
     private TodoRepository repository;
-    private Response response = new Response();
 
     public Iterable<Todo> list(){
         return repository.findAll();
     }
 
-    public String save(Todo todo){
-        if(todo.getName().length() > 4 && todo.getName().length() <=25){
-            repository.save(todo);
-        } else {
-            return "ToDo no creado";
-        }
-        return response.message = "ToDo registrado";
+    public Todo save(Todo todo){
+        return repository.save(todo);
+    }
+
+    public Todo update(Todo todo){
+        return repository.save(todo);
     }
 
     public void delete(Long id){

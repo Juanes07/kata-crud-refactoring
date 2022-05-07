@@ -1,32 +1,25 @@
 package co.com.sofka.crud.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 
-@Data
+
 @Entity
+@Setter
+@Getter
+@Table(name = "todo")
 public class Todo {
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @NotEmpty
-    @Column(name = "name", nullable = false)
+    @GeneratedValue
+    private Long id_todo;
     private String name;
-
-    @NotEmpty
-    @Column(name = "completed", nullable = false)
     private boolean completed;
+    private Long id_groupList;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            targetEntity = TodoList.class,
-            optional = false)
-    @JoinColumn(name = "todolist_id")
-    @JsonBackReference
-    private TodoList todoList;
 
 }
