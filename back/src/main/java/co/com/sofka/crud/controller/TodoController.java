@@ -34,7 +34,7 @@ public class TodoController {
     /**
      * Lista de ToDos
      *
-     * @return Iterable
+     * @return Iterable Lista de ToDo
      */
 
     @CrossOrigin

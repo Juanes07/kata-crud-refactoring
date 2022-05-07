@@ -34,7 +34,7 @@ public class GroupListController {
     /**
      * Lista de List ToDos
      *
-     * @return Iterable
+     * @return Iterable Lista de GruopList
      */
 
     @GetMapping(value = "/groupLists")
