@@ -3,14 +3,21 @@ import TodoForm from "./TodoForm";
 import { HOST_API, Store } from "../App";
 import List from "./List";
 
+/**
+ * Componente ListToDos
+ *
+ * @author Juan Esteban Velasquez P.
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+
 const ListTodos = () => {
   const {
     dispatch,
     state: { todoList },
   } = useContext(Store);
   const lista = todoList.list;
-  //TODO pendiente la peticion de bd
-  
+
   useEffect(() => {
     fetch(HOST_API + "/groupLists")
       .then((response) => response.json())
@@ -19,13 +26,21 @@ const ListTodos = () => {
       });
   }, [dispatch]);
 
-  //TODO pendiente la peticion de bd
+  /**
+   *  funcion para eliminar una Listas de ToDos
+   * @param  id_groupList
+   */
+
   const onDelete = (id_groupList) => {
     fetch(HOST_API + "/" + id_groupList + "/groupList", {
       method: "DELETE",
     }).then((list) => {
       dispatch({ type: "delete-groupList", id_groupList });
     });
+
+    /**
+     * para eliminar la columna creada por la lista de ToDo guardada
+     */
 
     const deleteDiv = document.getElementById("rowList");
     deleteDiv.removeChild(document.getElementById(id_groupList));

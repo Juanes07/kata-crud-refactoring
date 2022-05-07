@@ -5,9 +5,29 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: #984D1E;
+  background: -moz-linear-gradient(left, #984D1E 0%, #EFA838 50%, #EFA24D 100%);
+  background: -webkit-linear-gradient(left, #984D1E 0%, #EFA838 50%, #EFA24D 100%);
+  background: linear-gradient(to right, #984D1E 0%, #EFA838 50%, #EFA24D 100%);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1{
+  font-size: 50px;
+  margin-bottom: 50px;
+  margin-bottom: 50px;
+  font-family: 'Radio Canada', sans-serif;
+}
+
+h2 {
+  font-family: 'Radio Canada', sans-serif;
+}
+
+#buttonEdit{
+  width: 85px;
 }

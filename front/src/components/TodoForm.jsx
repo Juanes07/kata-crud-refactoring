@@ -2,6 +2,14 @@ import React, { useRef, useContext, useState } from "react";
 import { HOST_API } from "../App";
 import { Store } from "../App";
 
+/**
+ * Componente ToDoForm
+ *
+ * @author Juan Esteban Velasquez P.
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+
 const TodoForm = ({ id }) => {
   const formRef = useRef(null);
   const {
@@ -11,7 +19,15 @@ const TodoForm = ({ id }) => {
   const item = todo.item;
   const [state, setState] = useState(item);
 
+  /**
+   * funcion para Agregar el ToDo
+   * @param event
+   */
+
   const onAdd = (event) => {
+    /**
+     * se previene una recarga al presionar el boton
+     */
     event.preventDefault();
 
     const request = {
@@ -24,6 +40,7 @@ const TodoForm = ({ id }) => {
     /**
      * valida que el ToDo tenga como minimo 4 caracteres
      */
+    
     if (state.name.length > 3) {
       fetch(HOST_API + "/todo", {
         method: "POST",
@@ -41,7 +58,15 @@ const TodoForm = ({ id }) => {
     }
   };
 
-  const onEdit = (event) => {
+  /**
+   * funcion para Actualizar el ToDo
+   * @param event
+   */
+
+  const onUpdate = (event) => {
+    /**
+     * se previene una recarga al presionar el boton
+     */
     event.preventDefault();
 
     const request = {
@@ -84,12 +109,20 @@ const TodoForm = ({ id }) => {
         defaultValue={item.name}
       ></input>
       {item.id_todo && (
-        <button disabled={wihtOutTodo(state.name)} onClick={onEdit}>
+        <button
+          className="btn btn-success ms-3"
+          disabled={wihtOutTodo(state.name)}
+          onClick={onUpdate}
+        >
           Actualizar
         </button>
       )}
       {!item.id_todo && (
-        <button className="btn btn-success" disabled={wihtOutTodo(state.name)} onClick={onAdd}>
+        <button
+          className="btn btn-success ms-3"
+          disabled={wihtOutTodo(state.name)}
+          onClick={onAdd}
+        >
           Crear
         </button>
       )}

@@ -1,6 +1,14 @@
 import React, { useContext, useRef, useState } from "react";
 import { HOST_API, Store } from "../App";
 
+/**
+ * Componente FormNewList
+ *
+ * @author Juan Esteban Velasquez P.
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+
 const FormNewList = () => {
   const formRef = useRef(null);
   const {
@@ -10,14 +18,18 @@ const FormNewList = () => {
   const item = todoList.item;
   const [state, setState] = useState(item);
 
+  /**
+   * Funcion para agregar lista de ToDo
+   * @param event
+   */
+
   const onAdd = (event) => {
     event.preventDefault();
     const request = {
       name: state.name,
       id_groupList: null,
     };
-
-    if (state.name.trim().length === 0) {
+    if (state.name.length < 3) {
       let createAlert = document.getElementById("createAlert");
       createAlert.innerHTML = `<div class="alert alert-warning">
                 <h3>Ingresa porfavor un nombre a la lista no vacio</h3></div>`;
@@ -34,7 +46,7 @@ const FormNewList = () => {
       })
         .then((res) => res.json())
         .then((todoList) => {
-          dispatch({ type: "add-groupList", item: todoList });
+          dispatch({ type: "add-todoList", item: todoList });
           setState({ name: "" });
           formRef.current.reset();
         });
@@ -43,7 +55,7 @@ const FormNewList = () => {
   return (
     <div className="row">
       <div className="col-2"></div>
-      <div className="col-8">
+      <div className="col-8 ml-3">
         <form ref={formRef}>
           <div className="input-group mb-2">
             <input
@@ -55,7 +67,7 @@ const FormNewList = () => {
                 setState({ ...state, name: event.target.value });
               }}
             ></input>
-            <button onClick={onAdd} className="btn btn-primary">
+            <button onClick={onAdd} className="btn btn-primary m-1">
               Agregar Nueva Lista
             </button>
           </div>
