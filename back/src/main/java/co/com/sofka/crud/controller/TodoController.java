@@ -2,9 +2,7 @@ package co.com.sofka.crud.controller;
 
 import co.com.sofka.crud.models.Todo;
 import co.com.sofka.crud.services.TodoService;
-import co.com.sofka.crud.utility.GetErrors;
 import co.com.sofka.crud.utility.Response;
-import org.apache.catalina.util.ResourceSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,59 +11,91 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * GroupList Rest Controller
+ * Todo Rest Controller
  *
  * @author Juan Esteban Velasquez P.
  * @version 1.0.0
  * @since 1.0.0
  */
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api")
 public class TodoController {
 
     @Autowired
     private TodoService service;
+    /**
+     * instancia Response para manejo de mensajes / errores
+     */
+
+    private Response response = new Response();
 
     /**
-     * Variable para el manejo de las respuestas de las API
+     * Lista de ToDos
+     *
+     * @return Iterable
      */
-    private Response response = new Response();
-    private HttpStatus httpStatus = HttpStatus.OK;
-    private GetErrors getErrors;
 
-    @GetMapping(value = "api/todos")
-    public ResponseEntity<Response> list() {
+    @CrossOrigin
+    @GetMapping(value = "/todos")
+    public Iterable<Todo> list() {
+        return service.list();
+    }
+
+    /**
+     * Guardar ToDo
+     *
+     * @param todo
+     * @return ResponseEntity /  status Http
+     */
+
+    @PostMapping(value = "/todo")
+    public ResponseEntity<?> save(@RequestBody Todo todo) {
         response.restart();
         try {
-            response.data = service.list();
-            httpStatus = httpStatus.OK;
+            response.data = service.save(todo);
+            return new ResponseEntity<>(response.data, HttpStatus.CREATED);
         } catch (Exception exc) {
-            getErrors.getErrorMessageInternal(exc);
+            response.error = true;
+            return new ResponseEntity<>("ToDo no guardado", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(response, httpStatus);
     }
 
-    @PostMapping(value = "api/todo")
-    public Todo save(@RequestBody Todo todo) {
-        return service.save(todo);
-    }
+    /**
+     * Actualizar ToDo
+     *
+     * @param todo
+     * @return todo Actualizado o en caso de error una excepcion sin interrupcion
+     */
 
-    @PutMapping(value = "api/todo")
-    public ResponseEntity<?> update(@RequestBody Todo todo) {
+    @PutMapping(value = "/todo")
+    public Todo update(@RequestBody Todo todo) {
         if (todo.getId_todo() != null) {
-            return new ResponseEntity<>(service.save(todo), HttpStatus.OK);
+            return service.save(todo);
         }
         throw new RuntimeException("No existe el id para actualziar");
     }
 
-    @DeleteMapping(value = "api/{id}/todo")
+    /**
+     * Borrar ToDo
+     *
+     * @param id de tipo Long
+     */
+
+    @DeleteMapping(value = "/{id}/todo")
     public void delete(@PathVariable("id") Long id) {
         service.delete(id);
     }
 
-    @GetMapping(value = "api/{id}/todo")
+    /**
+     * Obtener Todo por medio de su ID
+     *
+     * @param id tipo Long
+     * @return ToDo obtenido
+     */
+
+    @GetMapping(value = "/{id}/todo")
     public Todo get(@PathVariable("id") Long id) {
         return service.get(id);
     }

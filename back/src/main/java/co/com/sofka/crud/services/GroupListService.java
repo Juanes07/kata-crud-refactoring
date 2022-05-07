@@ -5,6 +5,13 @@ import co.com.sofka.crud.repositories.GroupListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * GroupList Service
+ *
+ * @author Juan Esteban Velasquez P.
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Service
 public class GroupListService {
 
