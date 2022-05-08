@@ -1,5 +1,6 @@
 package co.com.sofka.crud.controller;
 
+import co.com.sofka.crud.DTO.TodoDTO;
 import co.com.sofka.crud.models.Todo;
 import co.com.sofka.crud.services.TodoService;
 import co.com.sofka.crud.utility.Response;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -34,12 +37,12 @@ public class TodoController {
     /**
      * Lista de ToDos
      *
-     * @return Iterable Lista de ToDo
+     * @return List de ToDo
      */
 
     @CrossOrigin
     @GetMapping(value = "/todos")
-    public Iterable<Todo> list() {
+    public List<TodoDTO> list() {
         return service.list();
     }
 
@@ -51,7 +54,7 @@ public class TodoController {
      */
 
     @PostMapping(value = "/todo")
-    public ResponseEntity<?> save(@RequestBody Todo todo) {
+    public ResponseEntity<?> save(@RequestBody TodoDTO todo) {
         response.restart();
         try {
             response.data = service.save(todo);
@@ -70,7 +73,7 @@ public class TodoController {
      */
 
     @PutMapping(value = "/todo")
-    public Todo update(@RequestBody Todo todo) {
+    public TodoDTO update(@RequestBody TodoDTO todo) {
         if (todo.getId_todo() != null) {
             return service.save(todo);
         }

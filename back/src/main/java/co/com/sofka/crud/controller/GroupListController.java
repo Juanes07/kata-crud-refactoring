@@ -1,12 +1,14 @@
 package co.com.sofka.crud.controller;
 
-import co.com.sofka.crud.models.GroupList;
+import co.com.sofka.crud.DTO.GroupListDTO;
 import co.com.sofka.crud.services.GroupListService;
 import co.com.sofka.crud.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -34,26 +36,26 @@ public class GroupListController {
     /**
      * Lista de List ToDos
      *
-     * @return Iterable Lista de GruopList
+     * @return List de GruopList
      */
 
     @GetMapping(value = "/groupLists")
-    public Iterable<GroupList> list() {
+    public List<GroupListDTO> list() {
         return service.list();
     }
 
     /**
      * Guardar Lista ToDos
      *
-     * @param groupList de tipo  GroupList
+     * @param GroupListDTO de tipo  GroupList
      * @return ResponseEntity / status Http
      */
 
     @PostMapping(value = "/groupList")
-    public ResponseEntity<?> save(@RequestBody GroupList groupList) {
+    public ResponseEntity<?> save(@RequestBody GroupListDTO groupListDTO) {
         response.restart();
         try {
-            response.data = service.save(groupList);
+            response.data = service.save(groupListDTO);
             return new ResponseEntity<>(response.data, HttpStatus.OK);
         } catch (Exception exc) {
             response.error = true;
@@ -66,13 +68,13 @@ public class GroupListController {
     /**
      * Actualizar Lista de ToDos
      *
-     * @param groupList de tipo GroupList
+     * @param GroupListDTO de tipo GroupList
      * @return
      */
 
     @PutMapping(value = "/groupList")
-    public GroupList update(@RequestBody GroupList groupList) {
-        return service.save(groupList);
+    public GroupListDTO update(@RequestBody GroupListDTO groupListDTO) {
+        return service.save(groupListDTO);
     }
 
 
