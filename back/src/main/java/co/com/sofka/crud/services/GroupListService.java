@@ -28,32 +28,32 @@ public class GroupListService {
     @Autowired
     private ModelMapper mapper;
 
-    public List<GroupListDTO> list(){
+    public List<GroupListDTO> list() {
         List<GroupListDTO> listDTOS = repository.findAll().stream().map(groupList -> mapper.map(groupList, GroupListDTO.class)).collect(Collectors.toList());
         return listDTOS;
     }
 
-    public GroupListDTO save(GroupListDTO groupDTO){
+    public GroupListDTO save(GroupListDTO groupDTO) {
         GroupList gruopentity = mapper.map(groupDTO, GroupList.class);
 
         GroupList groupList = repository.save(gruopentity);
 
         GroupListDTO groupListDTO = mapper.map(groupList, GroupListDTO.class);
 
-        return  groupListDTO;
+        return groupListDTO;
 
 
     }
 
-    public GroupList update(GroupList groupList){
+    public GroupList update(GroupList groupList) {
         return repository.save(groupList);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         repository.delete(get(id));
     }
 
-    public GroupList get(Long id){
+    public GroupList get(Long id) {
         return repository.findById(id).orElseThrow();
     }
 

@@ -47,8 +47,8 @@ public class GroupListController {
     /**
      * Guardar Lista ToDos
      *
-     * @param GroupListDTO de tipo  GroupList
-     * @return ResponseEntity / status Http
+     * @param GroupListDTO de tipo  GroupListDto
+     * @return ResponseEntity / status Httpv
      */
 
     @PostMapping(value = "/groupList")
