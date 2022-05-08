@@ -29,10 +29,10 @@ const FormNewList = () => {
       name: state.name,
       id_groupList: null,
     };
-    if (state.name.length < 3) {
+    if (state.name=== undefined || state.name === "") {
       let createAlert = document.getElementById("createAlert");
       createAlert.innerHTML = `<div class="alert alert-warning">
-                <h3>Ingresa porfavor un nombre a la lista no vacio</h3></div>`;
+                <h3>Ingresa porfavor un nombre a la lista</h3></div>`;
       setTimeout(() => {
         createAlert.innerHTML = "";
       }, 3000);
