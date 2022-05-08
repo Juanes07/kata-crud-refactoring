@@ -4,6 +4,11 @@ Pueden ver los siguientes videos para poder comprender la base del código fuent
 
 https://www.youtube.com/watch?v=vqWvGgx_iXY&list=PL0IrPQPrkqoEUDXn1nsjzxSX2zflWtJW-
 
+
+# Solucion Reto
+
+https://drive.google.com/file/d/1wiNAKL11JVmvH5aWKqe13a-Zfg1XGtyD/view?usp=sharing
+
 ## KATA Full Stack
 
 En el siguiente proyecto se presenta algunos conceptos de Full Stack, trabajando con Spring Boot + ReactJS.
@@ -46,4 +51,8 @@ Hacer un fork en su propio namespace y presentar la solución más valida para s
 Realizar la siguiente representación donde se tiene TO-Do List agripado en listas.
 
 ![alt text]( ./todo-list-kata.gif "Demo funcional del ToDo List")
+
+
+
+
 
